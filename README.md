@@ -11,15 +11,7 @@ var parse = require('exacto/parse')
 var compile = require('exacto')
 
 var program = `
-# Comments start with the # character
-
-input: a b c d   # define inputs for the program
-output: det      # define the outputs for the program
-
-# You can define intermediate variables in exacto like this:
-ad = a * d
-bc = b * c
-det = ad - bc
+x
 `
 
 //Generate the code for the subroutine
@@ -28,7 +20,6 @@ console.log(code)
 
 //Using eval we can then run the required predicate
 var det2d = (new Function(code))()
-
 console.log(det2d(
   1, -1,
   0,  1))
@@ -49,15 +40,26 @@ npm install --save exacto
 
 It works in any reasonable CommonJS environment including [browserify](http://browserify.org/), [webpack](https://webpack.github.io/), [node](http://nodejs.org/) and [iojs](https://iojs.org/).
 
+# Language specification
+
+## Comments
+
+## `input` declaration
+
+## `output` declaration
+
+## Statements
+
+
+
+# AST datatype
+
 # API
-
-## Language specification
-
-## AST specification
 
 ## Parsing
 
 #### `var ast = require('exacto/parse')`
+
 
 #### `var source = require('exact/serialize')`
 
