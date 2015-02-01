@@ -11,16 +11,24 @@ var parse = require('exacto/parse')
 var compile = require('exacto')
 
 var program = `
-x
+# Comments start with the # character
+
+input: a b c d   # define inputs for the program
+output: det      # define the outputs for the program
+
+# You can define intermediate variables in exacto like this:
+ad = a * d
+bc = b * c
+det = ad - bc
 `
 
 //Generate the code for the subroutine
 var code = compile(parse(program))
-console.log(code)
+console.log('GENERATED CODE:\n', code, '\n\n\n\n')
 
 //Using eval we can then run the required predicate
 var det2d = (new Function(code))()
-console.log(det2d(
+console.log('det ( 1 -1 )\n    ( 0  1 ) = \n',det2d(
   1, -1,
   0,  1))
 ```
@@ -42,30 +50,35 @@ It works in any reasonable CommonJS environment including [browserify](http://br
 
 # Language specification
 
-## Comments
+An exacto program consists of a sequence of statements separated by newline characters.  Each line can have a comment which is denoted using the `#` symbol.  Empty lines in the input are skipped as well as whitespace between tokens.
 
-## `input` declaration
+#### Variables and literals
 
-## `output` declaration
+Tokens in an exacto program are given by 
 
-## Statements
+#### `input` declaration
+
+The first line of an exacto program must be an input declaration.  This describes the arguments to the program and is given by an ordered 
+
+#### `output` declaration
+
+#### Statements
 
 
-
-# AST datatype
 
 # API
 
 ## Parsing
 
-#### `var ast = require('exacto/parse')`
+#### `var ast = require('exacto/parse')(source)`
+Parse a 
 
 
-#### `var source = require('exact/serialize')`
+#### `var source = require('exact/serialize')(ast)`
 
 ## Compiling
 
-#### `var jscode = require('exacto')`
+#### `var jscode = require('exacto')(ast)`
 
 # Legal
 (c) 2015 Mikola Lysenko. MIT License

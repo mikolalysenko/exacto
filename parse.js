@@ -46,7 +46,7 @@ function tokenize(source) {
       .replace(/\-/g, ' - ')
       .replace(/\*/g, ' * ')
       .replace(/\=/g, ' = ')
-      .split(/\s*/)            //Separate tokens
+      .split(/\s+/)            //Separate tokens
       .filter(notEmpty)        //Remove empty tokens
     if(toks.length > 0) {
       result.push(new Line(toks, i+1))
@@ -57,6 +57,9 @@ function tokenize(source) {
 
 function parseProgram(source) {
   var lines = tokenize(source)
+
+  console.log(lines)
+
   var lineNumber = 0
   function error(reason) {
     if(lineNumber) {
