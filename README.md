@@ -28,9 +28,9 @@ console.log('GENERATED CODE:\n', code, '\n\n\n\n')
 
 //Using eval we can then run the required predicate
 var det2d = (new Function(code))()
-console.log('det ( 1 -1 )\n    ( 0  1 ) = \n',det2d(
-  1, -1,
-  0,  1))
+console.log('det ( 1 -1 )\n    ( 0  1 ) = \n',
+  det2d(1, -1,
+        0,  1))
 ```
 
 Output:
@@ -50,31 +50,56 @@ It works in any reasonable CommonJS environment including [browserify](http://br
 
 # Language specification
 
-An exacto program consists of a sequence of statements separated by newline characters.  Each line can have a comment which is denoted using the `#` symbol.  Empty lines in the input are skipped as well as whitespace between tokens.
-
-#### Variables and literals
-
-Tokens in an exacto program are given by 
+An exacto program consists of a sequence of statements separated by newline characters.  Each line can have a comment which is denoted using the `#` symbol.  Empty lines are skipped as well as whitespace between tokens.
 
 #### `input` declaration
 
-The first line of an exacto program must be an input declaration.  This describes the arguments to the program and is given by an ordered 
+The first line of an exacto program must be an input declaration.  This describes the arguments to the program and is given by an ordered list of whitespace separated identifiers representing the arguments to the program preceded by the token `input:`.  For example,
+
+```
+input:  a b c d
+```
 
 #### `output` declaration
 
+The second line describes the output variable for the program.  This must be a single identifier preceded by the token `output:`,
+
+```
+output:  result
+```
+
 #### Statements
 
+Following this is a list of newline delimited statements.  Each statement is of the form:
 
+```
+result = left op right
+```
+
+Where `result` is an identifier which gets the result of the operation, `left` and `right` are either identifiers or double precision numbers, and `op` is one of the following operators:  `+`, `-`, `*`.  Each variable identifier must be initialized exactly once.
+
+#### Example
+
+```
+# Comments start with the # character
+
+input: a b c d   # define inputs for the program
+output: det      # define the outputs for the program
+
+# You can define intermediate variables in exacto like this:
+ad = a * d
+bc = b * c
+det = ad - bc
+```
 
 # API
 
 ## Parsing
 
 #### `var ast = require('exacto/parse')(source)`
-Parse a 
+Parse a source file into an AST for code generation.
 
-
-#### `var source = require('exact/serialize')(ast)`
+#### `var source = require('exacto/serialize')(ast)`
 
 ## Compiling
 

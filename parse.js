@@ -56,10 +56,6 @@ function tokenize(source) {
 }
 
 function parseProgram(source) {
-  var lines = tokenize(source)
-
-  console.log(lines)
-
   var lineNumber = 0
   function error(reason) {
     if(lineNumber) {
@@ -68,6 +64,10 @@ function parseProgram(source) {
       throw new Error('exacto-parse: ' + reason)
     }
   }
+  if(typeof source !== 'string') {
+    error('invalid source')
+  }
+  var lines = tokenize(source)
   function parseArg(arg) {
     if(isVariable(arg)) {
       return arg
@@ -93,7 +93,6 @@ function parseProgram(source) {
     var line        = lines[i]
     var tokens      = line.tokens
     lineNumber = line.number
-
     if(tokens.length < 3) {
       error('invalid statement')
     }
@@ -123,9 +122,9 @@ function parseProgram(source) {
       if(tokens.length % 2 !== 1) {
         error('invalid arguments, ' + tokens.join())
       }
-      for(var i=2; i<tokens.length; i+=2) {
-        args.push(parseArg(i))
-        if(i + 1 < tokens.length && tokens[i+1] !== op) {
+      for(var j=2; j<tokens.length; j+=2) {
+        args.push(parseArg(tokens[j]))
+        if(j + 1 < tokens.length && tokens[j+1] !== op) {
           error('cannot mix operators in a statement')
         }
       }

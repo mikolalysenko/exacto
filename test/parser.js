@@ -9,7 +9,7 @@ Object.keys(CASES).forEach(function(filename) {
   tape('parse ' + filename, function(t) {
     var src = CASES[filename]
     var ast = parse(src)
-    t.equals(serialize(parse(ast)), serialize(ast))
+    t.equals(serialize(parse(serialize(ast))), serialize(ast))
     t.end()
   })
 })
