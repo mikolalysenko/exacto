@@ -1,0 +1,9 @@
+# Comments start with the # character
+
+input: a b c d   # define inputs for the program
+output: det      # define the outputs for the program
+
+# You can define intermediate variables in exacto like this:
+ad = a * d
+bc = b * c
+det = ad - bc
