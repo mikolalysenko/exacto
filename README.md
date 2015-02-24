@@ -22,12 +22,10 @@ bc = b * c
 det = ad - bc
 `
 
-//Generate the code for the subroutine
-var code = compile(parse(program))
-console.log('GENERATED CODE:\n', code, '\n\n\n\n')
+//Now we compile the predicate:
+var det2 = exacto(program)
 
-//Using eval we can then run the required predicate
-var det2d = (new Function(code))()
+//And we can execute it in JavaScript directly
 console.log('det ( 1 -1 )\n    ( 0  1 ) = \n',
   det2d(1, -1,
         0,  1))
@@ -92,18 +90,27 @@ bc = b * c
 det = ad - bc
 ```
 
+# Command line interface
+
+TODO
+
 # API
 
-## Parsing
+## High level
+
+#### `var func = require('exacto')(source[, options])`
+Compiles a source string into an exacto program
+
+## Low level API
 
 #### `var ast = require('exacto/parse')(source)`
 Parse a source file into an AST for code generation.
 
 #### `var source = require('exacto/serialize')(ast)`
+Convert a parse tree back into a source string
 
-## Compiling
-
-#### `var jscode = require('exacto')(ast)`
+#### `var jscode = require('exacto/codegen')(ast,options)`
+Compile a parse tree into a JavaScript predicate
 
 # Roadmap
 
@@ -112,8 +119,8 @@ Here is a sketch of how this implementation would proceed:
 1. Basic parsing/syntax (ok for now)
 1. Tracing and debug mode (wip)
 1. Exact big integer fixed point calculations (wip)
-1. Testing and verification
-1. Interval arithmetic for predicates
+1. Testing and verification (wip)
+1. Interval arithmetic for predicates (wip)
 1. Floating point filters
 1. Adaptive floating point filters (generalize Shewchuk's method maybe? seems hard to handle denormals/overflow)
 
@@ -122,6 +129,11 @@ Other possible features:
 * Allow for interval/bigint output
 * Multivalued output?  Combine multiple tests into one predicate, for example for point-simplex tests
 * More language features: Conditionals, division, rational numbers, square root maybe (Galois extensions)?
+
+Priorities:
+
+* Exactness/correctness
+* Speed
 
 # Legal
 (c) 2015 Mikola Lysenko. MIT License
