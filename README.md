@@ -105,5 +105,23 @@ Parse a source file into an AST for code generation.
 
 #### `var jscode = require('exacto')(ast)`
 
+# Roadmap
+
+Here is a sketch of how this implementation would proceed:
+
+1. Basic parsing/syntax (ok for now)
+1. Tracing and debug mode (wip)
+1. Exact big integer fixed point calculations (wip)
+1. Testing and verification
+1. Interval arithmetic for predicates
+1. Floating point filters
+1. Adaptive floating point filters (generalize Shewchuk's method maybe? seems hard to handle denormals/overflow)
+
+Other possible features:
+
+* Allow for interval/bigint output
+* Multivalued output?  Combine multiple tests into one predicate, for example for point-simplex tests
+* More language features: Conditionals, division, rational numbers, square root maybe (Galois extensions)?
+
 # Legal
 (c) 2015 Mikola Lysenko. MIT License
