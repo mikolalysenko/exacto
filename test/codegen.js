@@ -10,7 +10,7 @@ Object.keys(CASES).forEach(function(filename) {
     var src = CASES[filename]
     var ast = parse(src)
     
-    console.log(codegen(ast, {trace: true}).code)
+    console.log(codegen(ast, {trace: true}))
 
     t.end()
   })
