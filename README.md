@@ -137,6 +137,7 @@ Here is a sketch of how this implementation would proceed:
 
 Other possible features:
 
+* Target asm.js
 * Allow for interval/bigint output
 * Multivalued output?  Combine multiple tests into one predicate, for example for point-simplex tests
 * More language features: Conditionals, division, rational numbers, square root maybe (Galois extensions)?
