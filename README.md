@@ -2,9 +2,18 @@
 
 exacto
 ======
-A tiny language for specifying exact floating point predicates.
+A tiny language for generating exact floating point predicates.
+
+### Motivation
+
+
+
 
 # Example
+
+## Command line interface
+
+## High level API usage
 
 ```javascript
 var parse = require('exacto/parse')
@@ -35,6 +44,8 @@ Output:
 
 ```
 ```
+
+## Low level API
 
 # Installation
 
