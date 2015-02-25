@@ -6,8 +6,7 @@ A tiny language for generating exact floating point predicates.
 
 ### Motivation
 
-
-
+* C.K. Yap, (1997) "[Towards exact geometric computation](ftp://cs.nyu.edu/pub/local/yap/exact/towards.ps.gz)"
 
 # Example
 
